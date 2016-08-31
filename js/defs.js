@@ -34,12 +34,12 @@ const areas = ['Experience', 'Strength', 'Impact', 'Interest'];
 var categories;
 
 const initCategories = () => categories = [
-	new Category('Community Organizing and Activism', 24, 'Activism'),
-	new Category('Community Engaged Learning and Research', 27, 'Learning'),
-	new Category('Direct Service', 28, 'Service'),
-	new Category('Philanthropy', 29, 'Philanthropy'),
-	new Category('Policy and Governance', 30, 'Policy'),
-	new Category('Social Entrepreneurship and Corporate Social Responsibility', 31, 'Entrepreneurship'),
+	new Category('Community Organizing and Activism', 24, 'COA'),
+	new Category('Community Engaged Learning and Research', 27, 'CELR'),
+	new Category('Direct Service', 28, 'DS'),
+	new Category('Philanthropy', 29, 'P'),
+	new Category('Policy and Governance', 30, 'P&G'),
+	new Category('Social Entrepreneurship and Corporate Social Responsibility', 31, 'SECSR'),
 ];
 
 initCategories();
