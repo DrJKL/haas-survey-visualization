@@ -3,25 +3,23 @@
 const individualScore = (field) => {
 	let axes = categories.map((c) => ({
 		axis: c.abbr,
-		value: c.result()[field]
+		value: c.result()[field],
 	}));
 	// axes[3].axis = field; axes[3].yOffset = -2;
 	return axes;
 };
 
-const genericStarChart = (xLabel, axes) => [
+const genericStarChart = (axes) => [
 	{
-		xLabel,
 		className: 'public-service-chart',
-		axes,
-	}
+	axes}
 ];
 
 var svg;
 
 const renderPage = function () {
 	$j('#haas-chart').empty();
-	const data = genericStarChart('All Data', categories.map(cat => cat.asAxis()));
+	const data = genericStarChart(categories.map(cat => cat.asAxis()));
 
 	const chart = RadarChart.chart();
 	let cfg = chart.config();// retrieve default config
@@ -36,12 +34,12 @@ const renderPage = function () {
 		h: cfg.h / 2,
 		levels: 0,
 		circles: false,
-		maxValue: 3,
+		maxValue: 3
 	});
 	cfg = chart.config();
 
 	function render () {
-		const areaData = areas.map(area => genericStarChart(area, individualScore(area.toLowerCase())));
+		const areaData = areas.map(area => genericStarChart(individualScore(area.toLowerCase())));
 		const game = svg
 			.selectAll('g.game')
 			.data(areaData);
@@ -49,7 +47,7 @@ const renderPage = function () {
 			.enter()
 			.append('g')
 			.classed('game', 1);
-		const offset = 30;
+		const offset = 0;
 		const padding = 100;
 		const translations = [
 			[
@@ -68,14 +66,7 @@ const renderPage = function () {
 			],
 		];
 
-		game.attr('transform', (d, i) => 'translate(' + translations[i][0] + ',' + (translations[i][1]) + ')').call(chart);
-		game
-			.enter()
-			.append('text')
-			.classed('area-label', 1)
-			.attr('transform', (d, i) => 'translate(' + translations[i][0] + ',' + ( + translations[i][1] - 10) + ')')
-			.attr('fill', '#820000')
-			.text(d => d[0].xLabel);
+		game.attr('transform', (d, i) => 'translate(' + translations[i][0] + ',' + translations[i][1] + ')').call(chart);
 	}
 	render();
 
